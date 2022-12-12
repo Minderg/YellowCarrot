@@ -24,5 +24,12 @@ namespace YellowCarrot
         {
             InitializeComponent();
         }
+
+        private void btnNextWindow_Click(object sender, RoutedEventArgs e)
+        {
+            RecipeWindow recipeWindow = new();
+            recipeWindow.Show();
+            Close();
+        }
     }
 }

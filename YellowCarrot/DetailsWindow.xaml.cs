@@ -22,7 +22,6 @@ namespace YellowCarrot
     /// </summary>
     public partial class DetailsWindow : Window
     {
-
         public DetailsWindow(int recipeId)
         {
             InitializeComponent();
@@ -39,6 +38,7 @@ namespace YellowCarrot
 
                 txtDetatilsName.Text = recipe.RecipeName.ToString();
                 txtDetatilsIngredient.Text = recipe.Ingredients.ToString();
+                
                 
             }
         }

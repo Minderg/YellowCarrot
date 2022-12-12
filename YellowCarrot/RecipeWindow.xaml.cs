@@ -33,6 +33,7 @@ namespace YellowCarrot
 
         }
 
+        // Hämtar alla recept som finns i databasen och läggger in dem i ListViewn
         private void UpdateUi()
         {
             using(AppDbContext context = new())
@@ -44,7 +45,7 @@ namespace YellowCarrot
                         ListViewItem item = new();
 
                         item.Content = recipe.RecipeName;
-                        item.Tag = item;
+                        item.Tag = recipe;
 
                         lvAllRecipes.Items.Add(item);
                     }
@@ -58,25 +59,26 @@ namespace YellowCarrot
             Close();
         }
 
+        // Hämtar mer information om den valda receptet i listviewn
         private void btnDetails_Click(object sender, RoutedEventArgs e)
         {
-            //ListViewItem selectedItem = lvAllRecipes.SelectedItem as ListViewItem;
-
-            if(lvAllRecipes.SelectedItem != null)
+            using(AppDbContext context = new())
             {
-                ListViewItem selectedItem = lvAllRecipes.SelectedItem as ListViewItem;
+                if (lvAllRecipes.SelectedItem != null)
+                {
+                    ListViewItem selectedItem = lvAllRecipes.SelectedItem as ListViewItem;
 
-                Recipe? selectedRecipe = selectedItem.Tag as Recipe;
+                    Recipe? selectedRecipe = selectedItem.Tag as Recipe;
 
-                DetailsWindow detailsWindow = new(selectedRecipe.RecipeId);
-                detailsWindow.Show();
-                //Close();
-            }
-            else
-            {
-                MessageBox.Show("Please enter a recipe, Darling");
-            }
-           
+                    DetailsWindow detailsWindow = new(selectedRecipe.RecipeId);
+                    detailsWindow.Show();
+                    Close();
+                }
+                else
+                {
+                    MessageBox.Show("Please enter a recipe, Darling");
+                }
+            } 
         }
 
         private void btnDeleteRecipe_Click(object sender, RoutedEventArgs e)
