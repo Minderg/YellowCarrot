@@ -62,7 +62,7 @@ namespace YellowCarrot
             }
             else
             {
-                lvAllRecipes.Items.Add($"Name: {newRecipe} | Ingredient: {newIngredient} | Special: {newTag} | Amount: {newQuantity}");
+                lvAllRecipes.Items.Add($"Recipe: {newRecipe} | Ingredient: {newIngredient} | Special: {newTag} | Amount: {newQuantity}");
             }
         }
     }
