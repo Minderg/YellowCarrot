@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace YellowCarrot.Models
 {
-    class Recipe
+    public class Recipe
     {
         public string RecipeName { get; set; } = null!;
         public int RecipeId { get; set; }

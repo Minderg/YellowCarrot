@@ -23,8 +23,8 @@ namespace YellowCarrot
     /// </summary>
     public partial class RecipeWindow : Window
     {
-        private Ingredient _ingredient;
-        private List<Tag> _tag;
+
+
         public RecipeWindow()
         {
             InitializeComponent();
@@ -60,7 +60,23 @@ namespace YellowCarrot
 
         private void btnDetails_Click(object sender, RoutedEventArgs e)
         {
+            //ListViewItem selectedItem = lvAllRecipes.SelectedItem as ListViewItem;
 
+            if(lvAllRecipes.SelectedItem != null)
+            {
+                ListViewItem selectedItem = lvAllRecipes.SelectedItem as ListViewItem;
+
+                Recipe? selectedRecipe = selectedItem.Tag as Recipe;
+
+                DetailsWindow detailsWindow = new(selectedRecipe.RecipeId);
+                detailsWindow.Show();
+                //Close();
+            }
+            else
+            {
+                MessageBox.Show("Please enter a recipe, Darling");
+            }
+           
         }
 
         private void btnDeleteRecipe_Click(object sender, RoutedEventArgs e)

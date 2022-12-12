@@ -1,0 +1,194 @@
+﻿<Window x:Class="YellowCarrot.DetailsWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:YellowCarrot"
+        mc:Ignorable="d"
+        Title="DetailsWindow" Height="450" Width="600" Background="#36393F" ResizeMode="NoResize">
+    <Grid>
+        <!-- Grid definitions -->
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <!-- Tools -->
+
+        <Label 
+            Grid.Column="2"
+            Grid.ColumnSpan="4"
+            FontSize="30"
+            FontWeight="Bold"
+            Content="Recipe Details" 
+            Margin="38,28,32,28" 
+            Grid.RowSpan="2"
+            Foreground="White" 
+            FontFamily="Forte"
+            />
+
+        <Label
+            Grid.ColumnSpan="2"
+            Grid.Row="2"
+            FontSize="20"
+            FontWeight="Bold"
+            Content="Name" 
+            Margin="23,43,37,27"
+            Foreground="White" 
+            FontFamily="Forte" 
+            Grid.Column="2" 
+            Grid.RowSpan="2"
+            />
+        <Label
+            Grid.ColumnSpan="3"
+            Grid.Row="3"
+            FontSize="20"
+            FontWeight="Bold"
+            Content="Ingredient" 
+            Margin="63,35,50,35"
+            Foreground="White" 
+            FontFamily="Forte" 
+            Grid.Column="1" 
+            Grid.RowSpan="2"
+            />
+        <Label
+            Grid.ColumnSpan="2"
+            Grid.Row="4"
+            FontSize="20"
+            FontWeight="Bold"
+            Content="Quantity" 
+            Margin="10,27,50,45"
+            Foreground="White" 
+            FontFamily="Forte" 
+            Grid.Column="2" 
+            Grid.RowSpan="2"
+            />
+
+        <Label
+            Grid.Row="5"
+            FontSize="20"
+            FontWeight="Bold"
+            Content="Tag" 
+            Margin="31,15,59,4"
+            Foreground="White" 
+            FontFamily="Forte" 
+            Grid.Column="2"
+            Grid.ColumnSpan="2"
+            />
+
+        <TextBox
+            Name="txtDetailsTag"
+            Grid.Row="5"
+            Grid.Column="3"
+            Grid.ColumnSpan="2"
+            Foreground="White"
+            VerticalContentAlignment="Center"
+            Width="100"
+            Height="30"
+            BorderBrush="White"
+            Background="Transparent"
+            BorderThickness="0,0,0,5" 
+            Margin="28,15,22,10"
+            />
+        <TextBox
+            Name="txtDetatilsQuantity"
+            Grid.Row="4"
+            Grid.Column="3"
+            Grid.ColumnSpan="2"
+            Foreground="White"
+            VerticalContentAlignment="Center"
+            Width="100"
+            Height="30"
+            BorderBrush="White"
+            Background="Transparent"
+            BorderThickness="0,0,0,5" 
+            Margin="28,24,22,0"
+            />
+        <TextBox
+            Name="txtDetatilsIngredient"
+            Grid.Row="3"
+            Grid.Column="3"
+            Grid.ColumnSpan="2"
+            Foreground="White"
+            VerticalContentAlignment="Center"
+            Width="100"
+            BorderBrush="White"
+            Background="Transparent"
+            BorderThickness="0,0,0,5" 
+            Margin="28,24,22,43" Grid.RowSpan="2" 
+            />
+        <TextBox
+            Name="txtDetatilsName"
+            Grid.Row="2"
+            Grid.Column="3"
+            Grid.ColumnSpan="2"
+            Foreground="White"
+            VerticalContentAlignment="Center"
+            Width="100"
+            BorderBrush="White"
+            Background="Transparent"
+            BorderThickness="0,0,0,5" 
+            Margin="28,24,22,34" 
+            Grid.RowSpan="2"
+            />
+        <Button 
+            Name="btnBack"
+            Grid.Column="4"
+            Content="Back"
+            FontFamily="Forte"
+            Foreground="white"
+            Background="Transparent"
+            BorderThickness="2"
+            BorderBrush="White" 
+            Margin="0,0,1,20" 
+            Grid.Row="6" 
+            FontSize="10" 
+            Click="btnBack_Click" 
+            />
+        <Button 
+            Name="btnUnlock"
+            Grid.Column="3"
+            Content="Unlock"
+            FontFamily="Forte"
+            Foreground="white"
+            Background="Transparent"
+            BorderThickness="2"
+            BorderBrush="White" 
+            Margin="0,0,1,20" 
+            Grid.Row="6" 
+            FontSize="10" 
+            Click="btnUnlock_Click" 
+            />
+        <Button 
+            Name="btnSave"
+            Grid.Column="3"
+            Content="Save"
+            FontFamily="Forte"
+            Foreground="white"
+            Background="Transparent"
+            BorderThickness="2"
+            BorderBrush="White" 
+            Margin="39,39,37,35" 
+            Grid.Row="6" 
+            FontSize="10" 
+            Grid.ColumnSpan="2" 
+            Grid.RowSpan="2" 
+            Click="btnSave_Click" 
+            />
+    </Grid>
+</Window>
