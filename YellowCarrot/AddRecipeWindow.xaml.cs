@@ -23,12 +23,10 @@ namespace YellowCarrot
     /// </summary>
     public partial class AddRecipe : Window
     {
-        private Recipe? recipe;
-        private Tag? tag;
-        private Ingredient ingredients;
         public AddRecipe()
         {
             InitializeComponent();
+
 
         }
 
@@ -46,15 +44,24 @@ namespace YellowCarrot
 
         private void btnSaveRecipe_Click(object sender, RoutedEventArgs e)
         {
-            lvAllRecipes.Items.Clear();
-
-            string newRecipe = txtNewRecipe.Text.Trim();
-            string newIngredient = txtNewIngredient.Text.Trim();
-            string newTag = txtNewTag.Text.Trim();
-            string newQuantity = txtNewQuantity.Text.Trim();
+            string newRecipe = txtNewRecipe.Text;
+            string newIngredient = txtNewIngredient.Text;
+            string newTag = txtNewTag.Text;
+            string newQuantity = txtNewQuantity.Text;
 
             using (AppDbContext context = new())
             {
+                new RecipeRepository(context).AddRecipe(new Recipe()
+                {
+                    RecipeName = newRecipe
+                });
+                new IngredientRepository(context).AddIngredient(new Ingredient()
+                {
+                    IngredientName = newIngredient,
+                    Quantity = newQuantity,
+                });
+
+                context.SaveChanges();
 
             }
         }
@@ -71,16 +78,9 @@ namespace YellowCarrot
             txtNewIngredient.Clear();
             txtNewTag.Clear();
 
-            //if (/*string.IsNullOrEmpty(newRecipe) */ string.IsNullOrEmpty(newIngredient) || string.IsNullOrEmpty(newTag) || string.IsNullOrEmpty(newQuantity))
-            //{
-            //    MessageBox.Show("Please enter full Recipe Information");
-            //}
-            //else
-            //{
             lvAllRecipes.Items.Add(newRecipe);
             lvAllRecipes.Items.Add($"{newIngredient} |  {newQuantity}");
-            //lvAllRecipes.Items.Add(newTag);
-            //}
+
         }
     }
 }

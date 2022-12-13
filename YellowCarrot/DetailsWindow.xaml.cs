@@ -23,7 +23,6 @@ namespace YellowCarrot
     /// </summary>
     public partial class DetailsWindow : Window
     {
-        private Recipe selectedRecipe;
         public DetailsWindow(int recipeId)
         {
             InitializeComponent();
@@ -32,6 +31,8 @@ namespace YellowCarrot
             txtDetatilsIngredient.IsEnabled = false;
             txtDetatilsName.IsEnabled = false;
             txtDetatilsQuantity.IsEnabled = false;
+            btnAdd.IsEnabled = false;
+            btnSave.IsEnabled = false;
 
             GetRecipeDetail(recipeId);
         }
@@ -58,6 +59,8 @@ namespace YellowCarrot
             txtDetatilsName.IsEnabled = true;
             txtDetailsTag.IsEnabled = true;
             txtDetatilsIngredient.IsEnabled = true;
+            btnSave.IsEnabled = true;
+            btnAdd.IsEnabled = true;
         }
 
         private void btnBack_Click(object sender, RoutedEventArgs e)

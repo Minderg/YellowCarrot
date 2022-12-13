@@ -39,17 +39,17 @@ namespace YellowCarrot.Data
             }, new Recipe()
             {
                 RecipeId = 2,
-                RecipeName = "Kött & Potatisgratäng",
+                RecipeName = "Bolognese",
                 TagId = 2       
             }, new Recipe()
             {
                 RecipeId = 3,
-                RecipeName = "Lax i Ugn",
+                RecipeName = "Kött & Potatisgratäng",
                 TagId = 3
             },new Recipe()
             {
                 RecipeId = 4,
-                RecipeName = "Bolognese",
+                RecipeName = "Lax i Ugn",
                 TagId = 2
             });
 
