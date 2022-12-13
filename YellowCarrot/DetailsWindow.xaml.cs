@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -22,32 +23,42 @@ namespace YellowCarrot
     /// </summary>
     public partial class DetailsWindow : Window
     {
+        private Recipe selectedRecipe;
         public DetailsWindow(int recipeId)
         {
             InitializeComponent();
 
+            txtDetailsTag.IsEnabled = false;
+            txtDetatilsIngredient.IsEnabled = false;
+            txtDetatilsName.IsEnabled = false;
+            txtDetatilsQuantity.IsEnabled = false;
 
             GetRecipeDetail(recipeId);
         }
 
         private void GetRecipeDetail(int recipeId)
         {
-            using(AppDbContext context = new())
+
+            using (AppDbContext context = new())
             {
-                Recipe? recipe = new RecipeRepository(context).GetRecipe(recipeId);
+                Recipe? recipes = new RecipeRepository(context).GetRecipe(recipeId);
 
-                txtDetatilsName.Text = recipe.RecipeName.ToString();
-                txtDetatilsIngredient.Text = $"{recipe.Ingredients}";
-                txtDetailsTag.Text = $"{recipe.Tag}";
-                //txtDetatilsQuantity.Text = $"{recipe.}"
+                txtDetatilsName.Text = recipes.RecipeName;
 
 
-
+                foreach(Ingredient ingredient in recipes.Ingredients)
+                {
+                    lvAllRecipesDetails.Items.Add($"{ingredient.IngredientName} | {ingredient.Quantity}");
+                    
+               }
             }
         }
         private void btnUnlock_Click(object sender, RoutedEventArgs e)
         {
-
+            txtDetatilsQuantity.IsEnabled = true;
+            txtDetatilsName.IsEnabled = true;
+            txtDetailsTag.IsEnabled = true;
+            txtDetatilsIngredient.IsEnabled = true;
         }
 
         private void btnBack_Click(object sender, RoutedEventArgs e)
@@ -59,7 +70,6 @@ namespace YellowCarrot
 
         private void btnSave_Click(object sender, RoutedEventArgs e)
         {
-
         }
     }
 }

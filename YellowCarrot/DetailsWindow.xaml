@@ -44,57 +44,65 @@
 
         <Label
             Grid.ColumnSpan="2"
-            Grid.Row="2"
+            Grid.Row="1"
             FontSize="20"
             FontWeight="Bold"
             Content="Name" 
-            Margin="23,43,37,27"
+            Margin="22,46,38,24"
             Foreground="White" 
             FontFamily="Forte" 
-            Grid.Column="2" 
+            Grid.Column="4" 
             Grid.RowSpan="2"
             />
         <Label
-            Grid.ColumnSpan="3"
-            Grid.Row="3"
+            Grid.ColumnSpan="2"
+            Grid.Row="2"
             FontSize="20"
             FontWeight="Bold"
             Content="Ingredient" 
-            Margin="63,35,50,35"
+            Margin="13,13,25,54"
             Foreground="White" 
             FontFamily="Forte" 
-            Grid.Column="1" 
             Grid.RowSpan="2"
+            />
+        <Label
+            Grid.ColumnSpan="2"
+            Grid.Row="3"
+            FontSize="20"
+            FontWeight="Bold"
+            Content="Quantity" 
+            Margin="38,18,22,0"
+            Foreground="White" 
+            FontFamily="Forte"
+            />
+        <TextBox
+            Name="txtDetatilsIngredient"
+            Grid.Row="2"
+            Grid.Column="1"
+            Grid.ColumnSpan="2"
+            Foreground="White"
+            VerticalContentAlignment="Center"
+            Width="100"
+            BorderBrush="White"
+            Background="Transparent"
+            BorderThickness="0,0,0,5" 
+            Margin="50,6,0,7" 
             />
         <Label
             Grid.ColumnSpan="2"
             Grid.Row="4"
             FontSize="20"
             FontWeight="Bold"
-            Content="Quantity" 
-            Margin="10,27,50,45"
-            Foreground="White" 
-            FontFamily="Forte" 
-            Grid.Column="2" 
-            Grid.RowSpan="2"
-            />
-
-        <Label
-            Grid.Row="5"
-            FontSize="20"
-            FontWeight="Bold"
             Content="Tag" 
-            Margin="31,15,59,4"
+            Margin="49,18,11,0"
             Foreground="White" 
-            FontFamily="Forte" 
-            Grid.Column="2"
-            Grid.ColumnSpan="2"
+            FontFamily="Forte"
             />
 
         <TextBox
             Name="txtDetailsTag"
-            Grid.Row="5"
-            Grid.Column="3"
+            Grid.Row="4"
+            Grid.Column="1"
             Grid.ColumnSpan="2"
             Foreground="White"
             VerticalContentAlignment="Center"
@@ -103,12 +111,12 @@
             BorderBrush="White"
             Background="Transparent"
             BorderThickness="0,0,0,5" 
-            Margin="28,15,22,10"
+            Margin="50,18,0,6"
             />
         <TextBox
             Name="txtDetatilsQuantity"
-            Grid.Row="4"
-            Grid.Column="3"
+            Grid.Row="3"
+            Grid.Column="1"
             Grid.ColumnSpan="2"
             Foreground="White"
             VerticalContentAlignment="Center"
@@ -117,25 +125,23 @@
             BorderBrush="White"
             Background="Transparent"
             BorderThickness="0,0,0,5" 
-            Margin="28,24,22,0"
+            Margin="50,21,0,3"
             />
-        <TextBox
-            Name="txtDetatilsIngredient"
-            Grid.Row="3"
-            Grid.Column="3"
-            Grid.ColumnSpan="2"
-            Foreground="White"
-            VerticalContentAlignment="Center"
-            Width="100"
-            BorderBrush="White"
-            Background="Transparent"
-            BorderThickness="0,0,0,5" 
-            Margin="28,24,22,43" Grid.RowSpan="2" 
-            />
+        <ListView
+            Name="lvAllRecipesDetails"
+            Grid.Row="2"
+            Grid.Column="4"
+            Grid.RowSpan="4"
+            Grid.ColumnSpan="4"
+            BorderThickness="10"
+            BorderBrush="Gray"
+            Margin="0,35,42,10"
+             />
+
         <TextBox
             Name="txtDetatilsName"
-            Grid.Row="2"
-            Grid.Column="3"
+            Grid.Row="1"
+            Grid.Column="5"
             Grid.ColumnSpan="2"
             Foreground="White"
             VerticalContentAlignment="Center"
@@ -143,7 +149,7 @@
             BorderBrush="White"
             Background="Transparent"
             BorderThickness="0,0,0,5" 
-            Margin="28,24,22,34" 
+            Margin="37,27,13,33" 
             Grid.RowSpan="2"
             />
         <Button 

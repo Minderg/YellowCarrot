@@ -22,7 +22,7 @@ namespace YellowCarrot.Services
         public Recipe? GetRecipe(int id)
         {
             //return _context.Recipes.FirstOrDefault(r => r.RecipeId == id);
-            return _context.Recipes.Include(t => t.Tag).FirstOrDefault(r => r.RecipeId == id);
+            return _context.Recipes.Include(i => i.Ingredients).Where(r => r.RecipeId == id).FirstOrDefault();
         }
 
         // Get All Recipes
