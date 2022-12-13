@@ -21,7 +21,8 @@ namespace YellowCarrot.Services
         // Get one by ID
         public Recipe? GetRecipe(int id)
         {
-            return _context.Recipes.FirstOrDefault(r => r.RecipeId == id);
+            //return _context.Recipes.FirstOrDefault(r => r.RecipeId == id);
+            return _context.Recipes.Include(t => t.Tag).FirstOrDefault(r => r.RecipeId == id);
         }
 
         // Get All Recipes

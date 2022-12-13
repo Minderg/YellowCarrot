@@ -37,9 +37,12 @@ namespace YellowCarrot
                 Recipe? recipe = new RecipeRepository(context).GetRecipe(recipeId);
 
                 txtDetatilsName.Text = recipe.RecipeName.ToString();
-                txtDetatilsIngredient.Text = recipe.Ingredients.ToString();
-                
-                
+                txtDetatilsIngredient.Text = $"{recipe.Ingredients}";
+                txtDetailsTag.Text = $"{recipe.Tag}";
+                //txtDetatilsQuantity.Text = $"{recipe.}"
+
+
+
             }
         }
         private void btnUnlock_Click(object sender, RoutedEventArgs e)
