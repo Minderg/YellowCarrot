@@ -25,7 +25,7 @@ namespace YellowCarrot
     {
         private Recipe? recipe;
         private Tag? tag;
-        private Ingredient ingredient;
+        private Ingredient ingredients;
         public AddRecipe()
         {
             InitializeComponent();
@@ -46,7 +46,17 @@ namespace YellowCarrot
 
         private void btnSaveRecipe_Click(object sender, RoutedEventArgs e)
         {
+            lvAllRecipes.Items.Clear();
 
+            string newRecipe = txtNewRecipe.Text.Trim();
+            string newIngredient = txtNewIngredient.Text.Trim();
+            string newTag = txtNewTag.Text.Trim();
+            string newQuantity = txtNewQuantity.Text.Trim();
+
+            using (AppDbContext context = new())
+            {
+
+            }
         }
 
         public void AddNewRecipe()
@@ -56,14 +66,21 @@ namespace YellowCarrot
             string newTag = txtNewTag.Text.Trim();
             string newQuantity = txtNewQuantity.Text.Trim();
 
-            if (string.IsNullOrEmpty(newRecipe) || string.IsNullOrEmpty(newIngredient) || string.IsNullOrEmpty(newTag) || string.IsNullOrEmpty(newQuantity))
-            {
-                MessageBox.Show("Please enter full Recipe Information");
-            }
-            else
-            {
-                lvAllRecipes.Items.Add($"Recipe: {newRecipe} | Ingredient: {newIngredient} | Special: {newTag} | Amount: {newQuantity}");
-            }
+            txtNewRecipe.Clear();
+            txtNewQuantity.Clear();
+            txtNewIngredient.Clear();
+            txtNewTag.Clear();
+
+            //if (/*string.IsNullOrEmpty(newRecipe) */ string.IsNullOrEmpty(newIngredient) || string.IsNullOrEmpty(newTag) || string.IsNullOrEmpty(newQuantity))
+            //{
+            //    MessageBox.Show("Please enter full Recipe Information");
+            //}
+            //else
+            //{
+            lvAllRecipes.Items.Add(newRecipe);
+            lvAllRecipes.Items.Add($"{newIngredient} |  {newQuantity}");
+            //lvAllRecipes.Items.Add(newTag);
+            //}
         }
     }
 }

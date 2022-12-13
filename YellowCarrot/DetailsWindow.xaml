@@ -183,7 +183,7 @@
         <Button 
             Name="btnSave"
             Grid.Column="3"
-            Content="Save"
+            Content="Save Recipe"
             FontFamily="Forte"
             Foreground="white"
             Background="Transparent"
@@ -195,6 +195,20 @@
             Grid.ColumnSpan="2" 
             Grid.RowSpan="2" 
             Click="btnSave_Click" 
+            />
+        <Button 
+            Name="btnAdd"
+            Grid.Column="1"
+            Content="Add"
+            FontFamily="Forte"
+            Foreground="white"
+            Background="Transparent"
+            BorderThickness="2"
+            BorderBrush="White" 
+            Margin="66,7,10,14" 
+            Grid.Row="5" 
+            FontSize="10" 
+            Grid.ColumnSpan="2" Click="btnAdd_Click" 
             />
     </Grid>
 </Window>

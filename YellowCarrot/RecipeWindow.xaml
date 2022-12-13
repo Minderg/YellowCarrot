@@ -49,7 +49,8 @@
             Grid.ColumnSpan="5"
             BorderThickness="10"
             BorderBrush="Gray"
-            Margin="52,32,10,23"
+            Margin="52,32,10,23" 
+            SelectionChanged="lvAllRecipes_SelectionChanged"
              />
 
         <Button 

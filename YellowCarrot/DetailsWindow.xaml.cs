@@ -48,8 +48,7 @@ namespace YellowCarrot
 
                 foreach(Ingredient ingredient in recipes.Ingredients)
                 {
-                    lvAllRecipesDetails.Items.Add($"{ingredient.IngredientName} | {ingredient.Quantity}");
-                    
+                    lvAllRecipesDetails.Items.Add($"{ingredient.IngredientName} | {ingredient.Quantity}");                   
                }
             }
         }
@@ -70,6 +69,11 @@ namespace YellowCarrot
 
         private void btnSave_Click(object sender, RoutedEventArgs e)
         {
+        }
+
+        private void btnAdd_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

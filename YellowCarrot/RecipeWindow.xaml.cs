@@ -24,10 +24,13 @@ namespace YellowCarrot
     public partial class RecipeWindow : Window
     {
 
-
         public RecipeWindow()
         {
             InitializeComponent();
+
+
+            btnDetails.IsEnabled = false;
+            btnDeleteRecipe.IsEnabled = false;
 
             UpdateUi();
 
@@ -76,14 +79,41 @@ namespace YellowCarrot
                 }
                 else
                 {
-                    MessageBox.Show("Please enter a recipe, Darling");
+                    MessageBox.Show("Please select a recipe, Darling");
                 }
             } 
         }
 
         private void btnDeleteRecipe_Click(object sender, RoutedEventArgs e)
         {
+            MessageBoxResult dialogResult = MessageBox.Show("Are you sure you want to delete this recipe?", "Delete a recipe", MessageBoxButton.YesNo); 
 
+            if(dialogResult == MessageBoxResult.Yes)
+            {
+
+                ListViewItem itemToRemove = lvAllRecipes.SelectedItem as ListViewItem;
+                Recipe selectedRecipe = itemToRemove.Tag as Recipe;
+
+                if (selectedRecipe != null)
+                {
+                    using (AppDbContext context = new())
+                    {
+                        context.Recipes.Remove(selectedRecipe);
+                        context.SaveChanges();
+                    }
+                    UpdateUi();
+                }
+                else
+                {
+                    MessageBox.Show("Please enter a recipe to delete!");
+                }
+            }            
+        }
+
+        private void lvAllRecipes_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            btnDetails.IsEnabled = true;
+            btnDeleteRecipe.IsEnabled = true;
         }
     }
 }
