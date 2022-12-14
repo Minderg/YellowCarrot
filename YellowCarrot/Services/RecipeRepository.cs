@@ -36,6 +36,12 @@ namespace YellowCarrot.Services
              _context.Recipes.Add(recipeToAdd);
         }
 
+        // Update recipe
+        public void UpdateRecipe(Recipe recipeToUpdate)
+        {
+            _context.Recipes.Update(recipeToUpdate);
+        }
+
         // Delete Recipe
         private void RemoveRecipe(Recipe recipeToDelete)
         {

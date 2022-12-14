@@ -26,6 +26,8 @@ namespace YellowCarrot
     public partial class DetailsWindow : Window
     {
         private Ingredient selectedItem;
+        private Recipe _recipe;
+
         public DetailsWindow(int recipeId)
         {
             InitializeComponent();
@@ -36,7 +38,6 @@ namespace YellowCarrot
             txtDetatilsQuantity.IsEnabled = false;
             btnAdd.IsEnabled = false;
             btnUpdateRecipe.IsEnabled = false;
-
             
             GetRecipeDetail(recipeId);
         }
@@ -46,13 +47,13 @@ namespace YellowCarrot
         {
             using (AppDbContext context = new())
             {
-                Recipe? recipes = new RecipeRepository(context).GetRecipe(recipeId);
+                _recipe = new RecipeRepository(context).GetRecipe(recipeId);
 
-                txtDetatilsName.Text = recipes.RecipeName;
-                txtDetailsTag.Text = $"{recipes.Tag.Name}";
+                txtDetatilsName.Text = _recipe.RecipeName;
+                txtDetailsTag.Text = $"{_recipe.Tag.Name}";
 
 
-                foreach (Ingredient ingredient in recipes.Ingredients)
+                foreach (Ingredient ingredient in _recipe.Ingredients)
                 {
                     lvAllRecipesDetails.Items.Add($"{ingredient.IngredientName} | {ingredient.Quantity}");
                 }
@@ -64,6 +65,7 @@ namespace YellowCarrot
             txtDetatilsIngredient.IsEnabled = true;
             btnUpdateRecipe.IsEnabled = true;
             btnAdd.IsEnabled = true;
+            txtDetatilsName.IsEnabled = true;
         }
 
         private void btnBack_Click(object sender, RoutedEventArgs e)
@@ -77,19 +79,17 @@ namespace YellowCarrot
         // Uppdaterar Recipe till det som har lagt till
         private void btnUpdateRecipe_Click(object sender, RoutedEventArgs e)
         {
-            string newIngredient = txtDetatilsIngredient.Text;
-            string newQuantity = txtDetatilsQuantity.Text;
-
            using(AppDbContext context = new())
-            {
-                new IngredientRepository(context).AddIngredient(new Ingredient()
+           {
+                if(txtDetatilsName.Text != _recipe.RecipeName)
                 {
-                    IngredientName = newIngredient,
-                    Quantity = newQuantity
-                });
+                    _recipe.RecipeName = txtDetatilsName.Text;
+                }
+
+                new RecipeRepository(context).UpdateRecipe(_recipe);
 
                 context.SaveChanges();
-            }
+           }
         }
 
 
@@ -111,6 +111,8 @@ namespace YellowCarrot
             };
 
             lvAllRecipesDetails.Items.Add(item);
+
+            _recipe.Ingredients.Add((Ingredient)item.Tag);
         }
 
         private void btnDelete_Click(object sender, RoutedEventArgs e)
