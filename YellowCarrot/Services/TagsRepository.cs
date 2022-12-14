@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography.Pkcs;
 using System.Text;
 using System.Threading.Tasks;
 using YellowCarrot.Data;
@@ -20,6 +21,16 @@ namespace YellowCarrot.Services
         public void AddTag(Tag tagToAdd)
         {
             //_context.Ingredients.Add(tagToAdd);
+        }
+
+        public Tag? GetTag(int id)
+        {
+            return _context.Tags.FirstOrDefault(t => t.TagId== id);
+        }
+
+        public List<Tag> GetTags()
+        {
+            return _context.Tags.ToList();
         }
     }
 }

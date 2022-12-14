@@ -27,12 +27,12 @@ namespace YellowCarrot
         {
             InitializeComponent();
 
-
+            GetTags();
         }
 
-        private void btnAddNewRecipe_Click(object sender, RoutedEventArgs e)
+        private void btnAddNewIngredient_Click(object sender, RoutedEventArgs e)
         {
-            AddNewRecipe();
+            AddNewIngredient();
         }
 
         private void btnBack_Click(object sender, RoutedEventArgs e)
@@ -45,42 +45,73 @@ namespace YellowCarrot
         private void btnSaveRecipe_Click(object sender, RoutedEventArgs e)
         {
             string newRecipe = txtNewRecipe.Text;
-            string newIngredient = txtNewIngredient.Text;
-            string newTag = txtNewTag.Text;
-            string newQuantity = txtNewQuantity.Text;
+            List<Ingredient> ingredients = GetListViewIngredients();
 
             using (AppDbContext context = new())
             {
+                Tag? tag = (Tag)((ComboBoxItem)cbTags.SelectedItem).Tag;
+
                 new RecipeRepository(context).AddRecipe(new Recipe()
                 {
-                    RecipeName = newRecipe
-                });
-                new IngredientRepository(context).AddIngredient(new Ingredient()
-                {
-                    IngredientName = newIngredient,
-                    Quantity = newQuantity,
+                    RecipeName = newRecipe,
+                    Ingredients = ingredients,
+                    TagId = tag.TagId
                 });
 
                 context.SaveChanges();
-
             }
+
+            RecipeWindow recipeWindow = new();
+            recipeWindow.Show();
+            this.Close();
         }
 
-        public void AddNewRecipe()
+        private List<Ingredient> GetListViewIngredients()
         {
-            string newRecipe = txtNewRecipe.Text.Trim();
+            List<Ingredient> ingredients = new();
+
+            foreach(ListViewItem lvItem in lvAllIngredients.Items)
+            {
+                ingredients.Add((Ingredient)lvItem.Tag);
+            }
+
+            return ingredients;
+        }
+
+        public void AddNewIngredient()
+        {
             string newIngredient = txtNewIngredient.Text.Trim();
-            string newTag = txtNewTag.Text.Trim();
             string newQuantity = txtNewQuantity.Text.Trim();
 
-            txtNewRecipe.Clear();
             txtNewQuantity.Clear();
             txtNewIngredient.Clear();
-            txtNewTag.Clear();
 
-            lvAllRecipes.Items.Add(newRecipe);
-            lvAllRecipes.Items.Add($"{newIngredient} |  {newQuantity}");
+            ListViewItem item = new();
+            item.Content = $"{newIngredient} / {newQuantity}";
+            item.Tag = new Ingredient()
+            {
+                IngredientName = newIngredient,
+                Quantity = newQuantity
+            };
 
+            lvAllIngredients.Items.Add(item);
+        }
+
+        private void GetTags()
+        {
+            using(AppDbContext context = new())
+            {
+                List<Tag> tags = new TagsRepository(context).GetTags();
+
+                foreach(Tag tag in tags)
+                {
+                    ComboBoxItem cbItem = new();
+                    cbItem.Content = tag.Name;
+                    cbItem.Tag = tag;
+
+                    cbTags.Items.Add(cbItem);
+                }
+            }
         }
     }
 }

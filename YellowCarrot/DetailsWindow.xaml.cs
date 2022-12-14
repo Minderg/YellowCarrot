@@ -72,11 +72,17 @@ namespace YellowCarrot
 
         private void btnSave_Click(object sender, RoutedEventArgs e)
         {
+
         }
 
         private void btnAdd_Click(object sender, RoutedEventArgs e)
         {
+            string mIngredient = txtDetatilsIngredient.Text.Trim();
+            string mQuantity = txtDetatilsQuantity.Text.Trim();
 
+
+            lvAllRecipesDetails.Items.Add(mIngredient);
+            lvAllRecipesDetails.Items.Add(mQuantity);
         }
     }
 }
