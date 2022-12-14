@@ -49,21 +49,28 @@ namespace YellowCarrot
 
             using (AppDbContext context = new())
             {
-                Tag? tag = (Tag)((ComboBoxItem)cbTags.SelectedItem).Tag;
-
-                new RecipeRepository(context).AddRecipe(new Recipe()
+                if(cbTags.SelectedItem!= null)
                 {
-                    RecipeName = newRecipe,
-                    Ingredients = ingredients,
-                    TagId = tag.TagId
-                });
+                    Tag? tag = (Tag)((ComboBoxItem)cbTags.SelectedItem).Tag;
 
-                context.SaveChanges();
+                    new RecipeRepository(context).AddRecipe(new Recipe()
+                    {
+                        RecipeName = newRecipe,
+                        Ingredients = ingredients,
+                        TagId = tag.TagId
+                    });
+
+                    context.SaveChanges();
+                    RecipeWindow recipeWindow = new();
+                    recipeWindow.Show();
+                    this.Close();
+                }
+                else
+                {
+                    MessageBox.Show("Du måste skriva in något för att spara!");
+                }
             }
 
-            RecipeWindow recipeWindow = new();
-            recipeWindow.Show();
-            this.Close();
         }
 
         private List<Ingredient> GetListViewIngredients()

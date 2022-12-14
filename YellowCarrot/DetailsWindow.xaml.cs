@@ -25,7 +25,7 @@ namespace YellowCarrot
     /// </summary>
     public partial class DetailsWindow : Window
     {
-        private List<Ingredient> selectedItem;
+        private Ingredient selectedItem;
         public DetailsWindow(int recipeId)
         {
             InitializeComponent();
@@ -61,8 +61,6 @@ namespace YellowCarrot
         private void btnUnlock_Click(object sender, RoutedEventArgs e)
         {
             txtDetatilsQuantity.IsEnabled = true;
-            txtDetatilsName.IsEnabled = true;
-            txtDetailsTag.IsEnabled = true;
             txtDetatilsIngredient.IsEnabled = true;
             btnUpdateRecipe.IsEnabled = true;
             btnAdd.IsEnabled = true;
@@ -79,25 +77,52 @@ namespace YellowCarrot
         // Uppdaterar Recipe till det som har lagt till
         private void btnUpdateRecipe_Click(object sender, RoutedEventArgs e)
         {
-           
+            string newIngredient = txtDetatilsIngredient.Text;
+            string newQuantity = txtDetatilsQuantity.Text;
+
+           using(AppDbContext context = new())
+            {
+                new IngredientRepository(context).AddIngredient(new Ingredient()
+                {
+                    IngredientName = newIngredient,
+                    Quantity = newQuantity
+                });
+
+                context.SaveChanges();
+            }
         }
 
 
         private void btnAdd_Click(object sender, RoutedEventArgs e)
         {
+            string newIngredient = txtDetatilsIngredient.Text.Trim();
+            string newQuantity = txtDetatilsQuantity.Text.Trim();
 
+            txtDetatilsIngredient.Clear();
+            txtDetatilsQuantity.Clear();
+            
+
+            ListViewItem item = new();
+            item.Content = $"{newIngredient} / {newQuantity}";
+            item.Tag = new Ingredient()
+            {
+                IngredientName = newIngredient,
+                Quantity = newQuantity
+            };
+
+            lvAllRecipesDetails.Items.Add(item);
         }
 
         private void btnDelete_Click(object sender, RoutedEventArgs e)
         {
-            ListViewItem itemSelected = lvAllRecipesDetails.SelectedItem as ListViewItem;
-            Ingredient selectedItem = itemSelected.Tag as Ingredient;
+            //ListViewItem itemSelected = lvAllRecipesDetails.SelectedItem as ListViewItem;
+            //Ingredient selectedItem = itemSelected.Tag as Ingredient;
 
-            using (AppDbContext context = new())
-            {
-                new IngredientRepository(context).RemoveIngredient(selectedItem);
+            //using (AppDbContext context = new())
+            //{
+            //    new IngredientRepository(context).RemoveIngredient(selectedItem);
                 
-            }
+            //}
         }
     }   
 }
