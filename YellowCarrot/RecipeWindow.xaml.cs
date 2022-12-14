@@ -87,7 +87,7 @@ namespace YellowCarrot
         // Det valda recepet som man har tryckt på, kommer att deletas
         private void btnDeleteRecipe_Click(object sender, RoutedEventArgs e)
         {
-            MessageBoxResult dialogResult = MessageBox.Show("Are you sure you want to delete this recipe?", "Delete a recipe", MessageBoxButton.YesNo); 
+            MessageBoxResult dialogResult = MessageBox.Show("Are you sure you want to delete this recipe?", "Warning!", MessageBoxButton.YesNo); 
 
             if(dialogResult == MessageBoxResult.Yes)
             {
