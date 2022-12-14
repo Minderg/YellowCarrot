@@ -95,7 +95,7 @@
             FontFamily="Berlin Sans FB"
             />
 
-        <TextBox
+        <TextBox 
             Name="txtDetailsTag"
             Grid.Row="4"
             Grid.Column="1"
@@ -175,9 +175,9 @@
             Click="btnUnlock_Click" 
             />
         <Button 
-            Name="btnSave"
+            Name="btnUpdateRecipe"
             Grid.Column="3"
-            Content="Save Recipe"
+            Content="Update Recipe"
             FontFamily="Berlin Sans FB"
             Foreground="white"
             Background="Transparent"
@@ -187,8 +187,7 @@
             Grid.Row="6" 
             FontSize="10" 
             Grid.ColumnSpan="2" 
-            Grid.RowSpan="2" 
-            Click="btnSave_Click" 
+            Grid.RowSpan="2" Click="btnUpdateRecipe_Click" 
             />
         <Button 
             Name="btnAdd"
@@ -202,7 +201,21 @@
             Margin="66,7,10,14" 
             Grid.Row="5" 
             FontSize="10" 
-            Grid.ColumnSpan="2" Click="btnAdd_Click" 
+            Grid.ColumnSpan="2" Click="btnAdd_Click"  
+            />
+        <Button 
+            Name="btnDelete"
+            Grid.Column="5"
+            Content="Delete Ingredient"
+            FontFamily="Berlin Sans FB"
+            Foreground="white"
+            Background="Transparent"
+            BorderThickness="2"
+            BorderBrush="White" 
+            Margin="54,1,18,20" 
+            Grid.Row="6" 
+            FontSize="10" 
+            Grid.ColumnSpan="2" Click="btnDelete_Click"  
             />
     </Grid>
 </Window>

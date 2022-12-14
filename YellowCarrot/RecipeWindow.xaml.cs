@@ -44,14 +44,14 @@ namespace YellowCarrot
                 List<Recipe> recipes = new RecipeRepository(context).GetRecipes();
 
                 foreach (Recipe recipe in recipes)
-                    {
-                        ListViewItem item = new();
+                {
+                    ListViewItem item = new();
 
-                        item.Content = recipe.RecipeName;
-                        item.Tag = recipe;
+                    item.Content = recipe.RecipeName;
+                    item.Tag = recipe;
 
-                        lvAllRecipes.Items.Add(item);
-                    }
+                    lvAllRecipes.Items.Add(item);
+                }
             }           
         }
 
@@ -84,6 +84,7 @@ namespace YellowCarrot
             } 
         }
 
+        // Det valda recepet som man har tryckt på, kommer att deletas
         private void btnDeleteRecipe_Click(object sender, RoutedEventArgs e)
         {
             MessageBoxResult dialogResult = MessageBox.Show("Are you sure you want to delete this recipe?", "Delete a recipe", MessageBoxButton.YesNo); 
@@ -106,9 +107,9 @@ namespace YellowCarrot
             }
             lvAllRecipes.Items.Clear();
             UpdateUi();
-
         }
 
+        // Alla knappar är osynliga tills man har valt ett recipe
         private void lvAllRecipes_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             btnDetails.IsEnabled = true;

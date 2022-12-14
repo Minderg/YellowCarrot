@@ -21,5 +21,11 @@ namespace YellowCarrot.Services
         {
             _context.Ingredients.Add(ingredientToAdd);
         }
+
+        
+        public void RemoveIngredient(Ingredient ingredientToRemove)
+        {
+            _context.Ingredients.Remove(ingredientToRemove);
+        }
     }
 }

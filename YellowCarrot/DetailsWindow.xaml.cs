@@ -1,10 +1,12 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Identity.Client;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Automation.Peers;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Documents;
@@ -23,6 +25,7 @@ namespace YellowCarrot
     /// </summary>
     public partial class DetailsWindow : Window
     {
+        private List<Ingredient> selectedItem;
         public DetailsWindow(int recipeId)
         {
             InitializeComponent();
@@ -32,25 +35,27 @@ namespace YellowCarrot
             txtDetatilsName.IsEnabled = false;
             txtDetatilsQuantity.IsEnabled = false;
             btnAdd.IsEnabled = false;
-            btnSave.IsEnabled = false;
+            btnUpdateRecipe.IsEnabled = false;
 
+            
             GetRecipeDetail(recipeId);
         }
 
+        // Displayar den valda Recipe och tar fram all information om det
         private void GetRecipeDetail(int recipeId)
         {
-
             using (AppDbContext context = new())
             {
                 Recipe? recipes = new RecipeRepository(context).GetRecipe(recipeId);
 
                 txtDetatilsName.Text = recipes.RecipeName;
+                txtDetailsTag.Text = $"{recipes.Tag.Name}";
 
 
-                foreach(Ingredient ingredient in recipes.Ingredients)
+                foreach (Ingredient ingredient in recipes.Ingredients)
                 {
-                    lvAllRecipesDetails.Items.Add($"{ingredient.IngredientName} | {ingredient.Quantity}");                   
-               }
+                    lvAllRecipesDetails.Items.Add($"{ingredient.IngredientName} | {ingredient.Quantity}");
+                }
             }
         }
         private void btnUnlock_Click(object sender, RoutedEventArgs e)
@@ -59,7 +64,7 @@ namespace YellowCarrot
             txtDetatilsName.IsEnabled = true;
             txtDetailsTag.IsEnabled = true;
             txtDetatilsIngredient.IsEnabled = true;
-            btnSave.IsEnabled = true;
+            btnUpdateRecipe.IsEnabled = true;
             btnAdd.IsEnabled = true;
         }
 
@@ -70,19 +75,29 @@ namespace YellowCarrot
             Close();
         }
 
-        private void btnSave_Click(object sender, RoutedEventArgs e)
-        {
 
+        // Uppdaterar Recipe till det som har lagt till
+        private void btnUpdateRecipe_Click(object sender, RoutedEventArgs e)
+        {
+           
         }
+
 
         private void btnAdd_Click(object sender, RoutedEventArgs e)
         {
-            string mIngredient = txtDetatilsIngredient.Text.Trim();
-            string mQuantity = txtDetatilsQuantity.Text.Trim();
 
-
-            lvAllRecipesDetails.Items.Add(mIngredient);
-            lvAllRecipesDetails.Items.Add(mQuantity);
         }
-    }
+
+        private void btnDelete_Click(object sender, RoutedEventArgs e)
+        {
+            ListViewItem itemSelected = lvAllRecipesDetails.SelectedItem as ListViewItem;
+            Ingredient selectedItem = itemSelected.Tag as Ingredient;
+
+            using (AppDbContext context = new())
+            {
+                new IngredientRepository(context).RemoveIngredient(selectedItem);
+                
+            }
+        }
+    }   
 }
