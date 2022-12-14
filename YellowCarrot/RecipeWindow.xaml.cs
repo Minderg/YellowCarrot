@@ -65,7 +65,7 @@ namespace YellowCarrot
         // Hämtar mer information om den valda receptet i listviewn
         private void btnDetails_Click(object sender, RoutedEventArgs e)
         {
-            using(AppDbContext context = new())
+            using (AppDbContext context = new())
             {
                 if (lvAllRecipes.SelectedItem != null)
                 {
@@ -100,14 +100,13 @@ namespace YellowCarrot
                     {
                         context.Recipes.Remove(selectedRecipe);
                         context.SaveChanges();
+
                     }
-                    UpdateUi();
                 }
-                else
-                {
-                    MessageBox.Show("Please enter a recipe to delete!");
-                }
-            }            
+            }
+            lvAllRecipes.Items.Clear();
+            UpdateUi();
+
         }
 
         private void lvAllRecipes_SelectionChanged(object sender, SelectionChangedEventArgs e)
