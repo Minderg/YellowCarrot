@@ -26,7 +26,7 @@ namespace YellowCarrot
     public partial class DetailsWindow : Window
     {
         private Ingredient selectedItem;
-        private Recipe _recipe;
+        private Recipe? _recipe;
 
         public DetailsWindow(int recipeId)
         {
@@ -55,8 +55,14 @@ namespace YellowCarrot
 
                 foreach (Ingredient ingredient in _recipe.Ingredients)
                 {
-                    lvAllRecipesDetails.Items.Add($"{ingredient.IngredientName} | {ingredient.Quantity}");
-                }
+                    ListViewItem listViewItem = new()
+                    {
+                        Content = $"{ingredient.IngredientName} | {ingredient.Quantity}",
+                        Tag = ingredient
+                    };
+
+                    lvAllRecipesDetails.Items.Add(listViewItem);    
+                }                
             }
         }
         private void btnUnlock_Click(object sender, RoutedEventArgs e)
@@ -97,34 +103,67 @@ namespace YellowCarrot
         {
             string newIngredient = txtDetatilsIngredient.Text.Trim();
             string newQuantity = txtDetatilsQuantity.Text.Trim();
-
-            txtDetatilsIngredient.Clear();
-            txtDetatilsQuantity.Clear();
             
-
-            ListViewItem item = new();
-            item.Content = $"{newIngredient} / {newQuantity}";
-            item.Tag = new Ingredient()
+            if(string.IsNullOrEmpty(newIngredient) || string.IsNullOrEmpty(newQuantity))
             {
-                IngredientName = newIngredient,
-                Quantity = newQuantity
-            };
+                MessageBox.Show("Need to enter a new Ingredient and the Quantity of it!");
+            }
+            else
+            {
+                txtDetatilsIngredient.Clear();
+                txtDetatilsQuantity.Clear();
 
-            lvAllRecipesDetails.Items.Add(item);
 
-            _recipe.Ingredients.Add((Ingredient)item.Tag);
+                ListViewItem item = new();
+                item.Content = $"{newIngredient} / {newQuantity}";
+                item.Tag = new Ingredient()
+                {
+                    IngredientName = newIngredient,
+                    Quantity = newQuantity
+                };
+
+                lvAllRecipesDetails.Items.Add(item);
+
+                _recipe.Ingredients.Add((Ingredient)item.Tag);
+            }            
         }
 
         private void btnDelete_Click(object sender, RoutedEventArgs e)
         {
-            //ListViewItem itemSelected = lvAllRecipesDetails.SelectedItem as ListViewItem;
-            //Ingredient selectedItem = itemSelected.Tag as Ingredient;
+            ListViewItem itemToRemove = lvAllRecipesDetails.SelectedItem as ListViewItem;
+            Ingredient selectedItem = itemToRemove.Tag as Ingredient;
 
-            //using (AppDbContext context = new())
-            //{
-            //    new IngredientRepository(context).RemoveIngredient(selectedItem);
-                
-            //}
+            using (AppDbContext context = new())
+            {
+                IngredientRepository ingredientRepo = new(context);
+                Ingredient ingredientToRemove = ingredientRepo.GetIngredient(selectedItem.IngredientId);
+                ingredientRepo.RemoveIngredient(ingredientToRemove);
+
+                context.SaveChanges();
+
+            }
+            UpdateUi();
+        }
+
+        private void UpdateUi()
+        {
+            lvAllRecipesDetails.Items.Clear();
+
+            using (AppDbContext context = new())
+            {
+                _recipe = new RecipeRepository(context).GetRecipe(_recipe.RecipeId);
+
+                foreach (Ingredient ingredient in _recipe.Ingredients)
+                {
+                    ListViewItem listViewItem = new()
+                    {
+                        Content = $"{ingredient.IngredientName} | {ingredient.Quantity}",
+                        Tag = ingredient
+                    };
+
+                    lvAllRecipesDetails.Items.Add(listViewItem);
+                }
+            }
         }
     }   
 }

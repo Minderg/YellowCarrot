@@ -48,6 +48,11 @@ namespace YellowCarrot.Services
            _context.Recipes.Remove(recipeToDelete);
         }
 
+        public void RemoveIngredient(Recipe ingredietToRemove)
+        {
+            _context.Recipes.Remove(ingredietToRemove);
+        }
+
         public void SaveDb()
         {
             _context.SaveChanges();

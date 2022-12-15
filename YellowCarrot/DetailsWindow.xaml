@@ -177,7 +177,7 @@
         <Button 
             Name="btnUpdateRecipe"
             Grid.Column="3"
-            Content="Update Recipe"
+            Content="Save Recipe"
             FontFamily="Berlin Sans FB"
             Foreground="white"
             Background="Transparent"

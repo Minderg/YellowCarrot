@@ -67,7 +67,7 @@ namespace YellowCarrot
                 }
                 else
                 {
-                    MessageBox.Show("Du måste skriva in något för att spara!");
+                    MessageBox.Show("You need to a Recipe to save!");
                 }
             }
 
@@ -87,21 +87,29 @@ namespace YellowCarrot
 
         public void AddNewIngredient()
         {
+            string newRecipe = txtNewRecipe.Text.Trim();
             string newIngredient = txtNewIngredient.Text.Trim();
             string newQuantity = txtNewQuantity.Text.Trim();
-
-            txtNewQuantity.Clear();
-            txtNewIngredient.Clear();
-
-            ListViewItem item = new();
-            item.Content = $"{newIngredient} / {newQuantity}";
-            item.Tag = new Ingredient()
+            
+            if(string.IsNullOrEmpty(newIngredient) || string.IsNullOrEmpty(newQuantity) || string.IsNullOrEmpty(newRecipe)) 
             {
-                IngredientName = newIngredient,
-                Quantity = newQuantity
-            };
+                MessageBox.Show("Need to enter full recipe description!");
+            }
+            else
+            {
+                txtNewQuantity.Clear();
+                txtNewIngredient.Clear();
 
-            lvAllIngredients.Items.Add(item);
+                ListViewItem item = new();
+                item.Content = $"{newIngredient} / {newQuantity}";
+                item.Tag = new Ingredient()
+                {
+                    IngredientName = newIngredient,
+                    Quantity = newQuantity
+                };
+
+                lvAllIngredients.Items.Add(item);
+            }    
         }
 
         private void GetTags()

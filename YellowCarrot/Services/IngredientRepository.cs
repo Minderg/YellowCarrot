@@ -22,10 +22,16 @@ namespace YellowCarrot.Services
             _context.Ingredients.Add(ingredientToAdd);
         }
 
+        public Ingredient? GetIngredient(int id)
+        {
+            return _context.Ingredients.FirstOrDefault(i => i.IngredientId == id);
+        }
+
         
         public void RemoveIngredient(Ingredient ingredientToRemove)
         {
             _context.Ingredients.Remove(ingredientToRemove);
         }
+
     }
 }
