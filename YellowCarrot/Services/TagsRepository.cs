@@ -18,16 +18,6 @@ namespace YellowCarrot.Services
             _context = context;
         }
 
-        //public void AddTag(Tag tagToAdd)
-        //{
-        //    _context.Ingredients.Add(tagToAdd);
-        //}
-
-        //public Tag? GetTag(int id)
-        //{
-        //    return _context.Tags.FirstOrDefault(t => t.TagId== id);
-        //}
-
         public List<Tag> GetTags()
         {
             return _context.Tags.ToList();

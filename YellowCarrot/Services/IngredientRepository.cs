@@ -17,11 +17,6 @@ namespace YellowCarrot.Services
             _context = context;
         }
 
-        //public void AddIngredient(Ingredient ingredientToAdd)
-        //{
-        //    _context.Ingredients.Add(ingredientToAdd);
-        //}
-
         public Ingredient? GetIngredient(int id)
         {
             return _context.Ingredients.FirstOrDefault(i => i.IngredientId == id);
