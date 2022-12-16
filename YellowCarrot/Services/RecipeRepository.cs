@@ -43,19 +43,14 @@ namespace YellowCarrot.Services
         }
 
         // Delete Recipe
-        private void RemoveRecipe(Recipe recipeToDelete)
-        {
-           _context.Recipes.Remove(recipeToDelete);
-        }
+        //private void RemoveRecipe(Recipe recipeToDelete)
+        //{
+        //   _context.Recipes.Remove(recipeToDelete);
+        //}
 
-        public void RemoveIngredient(Recipe ingredietToRemove)
-        {
-            _context.Recipes.Remove(ingredietToRemove);
-        }
-
-        public void SaveDb()
-        {
-            _context.SaveChanges();
-        }
+        //public void RemoveIngredient(Recipe ingredietToRemove)
+        //{
+        //    _context.Recipes.Remove(ingredietToRemove);
+        //}
     }
 }

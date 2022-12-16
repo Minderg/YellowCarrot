@@ -30,11 +30,13 @@ namespace YellowCarrot
             GetTags();
         }
 
+        // Klicka här så lägger man till en ny ingredient
         private void btnAddNewIngredient_Click(object sender, RoutedEventArgs e)
         {
             AddNewIngredient();
         }
 
+        // Kommer till baka till RecipeSidan(Startsidan)
         private void btnBack_Click(object sender, RoutedEventArgs e)
         {
             RecipeWindow recipeWindow = new();
@@ -42,6 +44,7 @@ namespace YellowCarrot
             Close();
         }
 
+        // Spara det nya recepet som man har skrivit in, till Listviewn och databasen
         private void btnSaveRecipe_Click(object sender, RoutedEventArgs e)
         {
             string newRecipe = txtNewRecipe.Text;
@@ -53,6 +56,7 @@ namespace YellowCarrot
                 {
                     Tag? tag = (Tag)((ComboBoxItem)cbTags.SelectedItem).Tag;
 
+                    // Lägger till ett nytt Recipe med, Namn, ingredient och Tag
                     new RecipeRepository(context).AddRecipe(new Recipe()
                     {
                         RecipeName = newRecipe,
@@ -73,6 +77,7 @@ namespace YellowCarrot
 
         }
 
+        // Loppar igenom vad för ingredients och lägger in den i en lista
         private List<Ingredient> GetListViewIngredients()
         {
             List<Ingredient> ingredients = new();
@@ -85,6 +90,7 @@ namespace YellowCarrot
             return ingredients;
         }
 
+        // Lägger till en ny ingredient i Listviewn men sparar inte den till databasen
         public void AddNewIngredient()
         {
             string newRecipe = txtNewRecipe.Text.Trim();
@@ -112,6 +118,7 @@ namespace YellowCarrot
             }    
         }
 
+        // Hämtar alla tags o loppar dem och skickar in dem i comboboxen
         private void GetTags()
         {
             using(AppDbContext context = new())

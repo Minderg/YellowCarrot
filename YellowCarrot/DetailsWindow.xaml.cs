@@ -27,7 +27,8 @@ namespace YellowCarrot
     {
         private Ingredient selectedItem;
         private Recipe? _recipe;
-
+        private Ingredient ingredient;
+        
         public DetailsWindow(int recipeId)
         {
             InitializeComponent();
@@ -38,6 +39,7 @@ namespace YellowCarrot
             txtDetatilsQuantity.IsEnabled = false;
             btnAdd.IsEnabled = false;
             btnUpdateRecipe.IsEnabled = false;
+            btnDelete.IsEnabled = false;
             
             GetRecipeDetail(recipeId);
         }
@@ -65,15 +67,19 @@ namespace YellowCarrot
                 }                
             }
         }
+
+        // Unlockar så det blir möjligt att skriva in mer information
         private void btnUnlock_Click(object sender, RoutedEventArgs e)
         {
             txtDetatilsQuantity.IsEnabled = true;
             txtDetatilsIngredient.IsEnabled = true;
             btnUpdateRecipe.IsEnabled = true;
             btnAdd.IsEnabled = true;
+            btnDelete.IsEnabled = true;
             txtDetatilsName.IsEnabled = true;
         }
 
+        // Kommer tillbaka till RecipeSidan
         private void btnBack_Click(object sender, RoutedEventArgs e)
         {
             RecipeWindow recipeWindow = new();
@@ -103,12 +109,13 @@ namespace YellowCarrot
         {
             string newIngredient = txtDetatilsIngredient.Text.Trim();
             string newQuantity = txtDetatilsQuantity.Text.Trim();
+
             
             if(string.IsNullOrEmpty(newIngredient) || string.IsNullOrEmpty(newQuantity))
             {
                 MessageBox.Show("Need to enter a new Ingredient and the Quantity of it!");
             }
-            else
+            else 
             {
                 txtDetatilsIngredient.Clear();
                 txtDetatilsQuantity.Clear();
@@ -128,6 +135,7 @@ namespace YellowCarrot
             }            
         }
 
+        // Tar bort även en ingredient i listviewn samt i databasen
         private void btnDelete_Click(object sender, RoutedEventArgs e)
         {
             ListViewItem itemToRemove = lvAllRecipesDetails.SelectedItem as ListViewItem;
@@ -145,6 +153,7 @@ namespace YellowCarrot
             UpdateUi();
         }
 
+        // Kommer alltid att uppdatera listviewn så den visar vad man har i den
         private void UpdateUi()
         {
             lvAllRecipesDetails.Items.Clear();

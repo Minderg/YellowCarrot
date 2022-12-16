@@ -54,7 +54,8 @@ namespace YellowCarrot
                 }
             }           
         }
-
+        
+        // Kommer till AddREcipe sidan
         private void btnAddRecipe_Click(object sender, RoutedEventArgs e)
         {
             AddRecipe addRecipe = new();
